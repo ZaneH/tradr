@@ -7,7 +7,7 @@ This is built to be an open-source bot to watch Uniswap and make trades based on
 - [ ] yarn
 
 # Setup
-Simply clone the repo and run `./start.sh`
+Simply clone the repo and run `./start.sh`. If everything succeeds, you'll be able to run the servers on your machine.
 
 ## Run development servers (Ropsten)
 Open 2 instances of your Terminal
