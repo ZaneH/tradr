@@ -4,7 +4,7 @@ This is built to be an open-source bot to watch Uniswap and make trades based on
 # Requirements
 - [ ] Docker
 - [ ] Node.js
-- [ ] A brain
+- [ ] yarn
 
 # Setup
 Simply clone the repo and run `./start.sh`
@@ -15,3 +15,4 @@ Open 2 instances of your Terminal
 - Run `yarn start` in ./packages/web
 
 ## Run production servers (Mainnet)
+(Coming soon)
