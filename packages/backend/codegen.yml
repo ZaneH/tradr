@@ -1,0 +1,14 @@
+schema: http://localhost:4000
+documents: ../web/src/**/*.graphql
+generates:
+  ../web/src/generated/types.tsx:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      withHooks: true
+      withRefetchFn: true
+  ../backend/src/generated/types.tsx:
+    plugins:
+      - typescript
