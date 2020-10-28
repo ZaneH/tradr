@@ -5,12 +5,12 @@ import {
   InMemoryCache,
 } from '@apollo/client'
 import preset from '@rebass/preset'
-import { setContext } from 'apollo-link-context'
 import { ThemeProvider } from 'emotion-theming'
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Routes from './constants/Routes'
 import { HomePage } from './pages'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 const theme = {
   ...preset,

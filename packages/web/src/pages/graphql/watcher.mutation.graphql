@@ -1,0 +1,11 @@
+mutation CreateWatcher($fromTokenId: ID!, $toTokenId: ID!, $fromTokenAmount: Float!, $toTokenAmount: Float!) {
+    createWatcher(fromTokenId: $fromTokenId, toTokenId: $toTokenId, fromTokenAmount: $fromTokenAmount, toTokenAmount: $toTokenAmount) {
+        ...WatcherFragment
+    }
+}
+
+mutation SetActiveWatcher($id: ID!, $active: Boolean!) {
+    setActiveWatcher(id: $id, active: $active) {
+        ...WatcherFragment
+    }
+}

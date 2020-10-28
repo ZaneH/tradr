@@ -35,11 +35,16 @@ export interface NexusGenScalars {
 export interface NexusGenRootTypes {
   Mutation: {};
   Query: {};
-  User: { // root type
+  Token: { // root type
+    contract: string; // String!
     id: string; // String!
+    symbol: string; // String!
   }
   Watcher: { // root type
+    fromAmount: number; // Float!
     id: string; // String!
+    isActive: boolean; // Boolean!
+    toAmount: number; // Float!
   }
 }
 
@@ -53,23 +58,40 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
-    createWatch: NexusGenRootTypes['Watcher'] | null; // Watcher
+    createWatcher: NexusGenRootTypes['Watcher'] | null; // Watcher
+    setActiveWatcher: NexusGenRootTypes['Watcher'] | null; // Watcher
   }
   Query: { // field return type
     getAddress: string | null; // String
+    getSupportedTokens: Array<NexusGenRootTypes['Token'] | null> | null; // [Token]
+    getWatchers: Array<NexusGenRootTypes['Watcher'] | null> | null; // [Watcher]
   }
-  User: { // field return type
+  Token: { // field return type
+    contract: string; // String!
     id: string; // String!
+    symbol: string; // String!
   }
   Watcher: { // field return type
+    fromAmount: number; // Float!
+    fromToken: NexusGenRootTypes['Token']; // Token!
     id: string; // String!
+    isActive: boolean; // Boolean!
+    toAmount: number; // Float!
+    toToken: NexusGenRootTypes['Token']; // Token!
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
-    createWatch: { // args
-      token0Amount: number; // Float!
+    createWatcher: { // args
+      fromTokenAmount: number; // Float!
+      fromTokenId: string; // ID!
+      toTokenAmount: number; // Float!
+      toTokenId: string; // ID!
+    }
+    setActiveWatcher: { // args
+      active: boolean; // Boolean!
+      id: string; // ID!
     }
   }
 }
@@ -79,7 +101,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Mutation" | "Query" | "User" | "Watcher";
+export type NexusGenObjectNames = "Mutation" | "Query" | "Token" | "Watcher";
 
 export type NexusGenInputNames = never;
 

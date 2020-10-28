@@ -1,3 +1,4 @@
 # Prisma Migrate lockfile v1
 
 20201023122504-initial-migration
+20201027011138-removed-user

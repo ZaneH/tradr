@@ -1,16 +1,54 @@
-import { floatArg, mutationType } from '@nexus/schema'
+import { booleanArg, floatArg, idArg, mutationType } from '@nexus/schema'
 
 const Mutation = mutationType({
   definition(t) {
-    t.field('createWatch', {
+    /**
+     * Create a Watcher to watch for a trade.
+     */
+    t.field('createWatcher', {
       type: 'Watcher',
       args: {
-        token0Amount: floatArg({ nullable: false }),
+        fromTokenAmount: floatArg({ nullable: false }),
+        toTokenAmount: floatArg({ nullable: false }),
+        fromTokenId: idArg({ nullable: false }),
+        toTokenId: idArg({ nullable: false }),
       },
-      resolve: (root, { token0Amount }, ctx) => {
+      resolve: (root, args, ctx) => {
         return ctx.prisma.watcher.create({
           data: {
-            fromAmount: token0Amount,
+            fromAmount: args.fromTokenAmount,
+            toAmount: args.toTokenAmount,
+            fromToken: {
+              connect: {
+                id: args.fromTokenId,
+              },
+            },
+            toToken: {
+              connect: {
+                id: args.toTokenId,
+              },
+            },
+          },
+        })
+      },
+    })
+
+    /**
+     * Set the isActive property on a Watcher.
+     */
+    t.field('setActiveWatcher', {
+      type: 'Watcher',
+      args: {
+        id: idArg({ nullable: false }),
+        active: booleanArg({ nullable: false }),
+      },
+      resolve: (root, { id, active }, ctx) => {
+        return ctx.prisma.watcher.update({
+          where: {
+            id,
+          },
+          data: {
+            isActive: active,
           },
         })
       },

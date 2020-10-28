@@ -1,0 +1,12 @@
+fragment WatcherFragment on Watcher {
+  id
+  isActive
+  fromAmount
+  toAmount
+  toToken {
+    ...TokenFragment
+  }
+  fromToken {
+    ...TokenFragment
+  }
+}

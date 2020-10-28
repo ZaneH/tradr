@@ -9,7 +9,11 @@ export const provider = getDefaultProvider('homestead', {
 })
 
 async function main() {
-  const tradeInfo = await getTradeInfo(TOKENS.DEUS.address, TOKENS.WETH.address)
+  const tradeInfo = await getTradeInfo(
+    TOKENS.DEUS.contract,
+    TOKENS.WETH.contract
+  )
+
   console.log('Found pair ---')
   console.log(
     `1 ${getSymbolFromAddress(

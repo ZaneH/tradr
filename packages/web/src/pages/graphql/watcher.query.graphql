@@ -1,0 +1,5 @@
+query GetWatchers {
+  getWatchers {
+    ...WatcherFragment
+  }
+}

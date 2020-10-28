@@ -3,17 +3,27 @@
 
 
 type Mutation {
-  createWatch(token0Amount: Float!): Watcher
+  createWatcher(fromTokenAmount: Float!, fromTokenId: ID!, toTokenAmount: Float!, toTokenId: ID!): Watcher
+  setActiveWatcher(active: Boolean!, id: ID!): Watcher
 }
 
 type Query {
   getAddress: String
+  getSupportedTokens: [Token]
+  getWatchers: [Watcher]
 }
 
-type User {
+type Token {
+  contract: String!
   id: String!
+  symbol: String!
 }
 
 type Watcher {
+  fromAmount: Float!
+  fromToken: Token!
   id: String!
+  isActive: Boolean!
+  toAmount: Float!
+  toToken: Token!
 }

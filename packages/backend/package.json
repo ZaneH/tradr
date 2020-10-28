@@ -4,10 +4,11 @@
   "description": "",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --respawn --no-emit src/server",
-    "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
+    "generate": "npm -s run generate:prisma",
     "generate:prisma": "prisma generate",
     "generate:nexus": "ts-node --transpile-only src/schema",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "seed": "ts-node src/seed"
   },
   "keywords": [],
   "author": "",
