@@ -7,7 +7,7 @@ import {
   TokenAmount,
   WETH,
 } from '@uniswap/sdk'
-import { provider } from '..'
+import { provider } from '../server'
 
 interface ITradeInfo {
   fromToken: Token
@@ -30,3 +30,7 @@ export const getTradeInfo = async (
     pair,
   }
 }
+
+// export const makeTrade = async () => {
+
+// }

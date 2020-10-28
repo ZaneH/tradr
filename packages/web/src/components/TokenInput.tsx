@@ -47,7 +47,9 @@ const TokenInput = ({ tokens, selectId, inputId, ...props }: Props) => {
           <Adapted.Select selectId={selectId}>
             <option key="none"></option>
             {tokens!.map((token) => (
-              <option value={token?.id}>{token?.symbol}</option>
+              <option key={token?.id} value={token?.id}>
+                {token?.symbol}
+              </option>
             ))}
           </Adapted.Select>
         </Box>

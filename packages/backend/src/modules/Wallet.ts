@@ -11,9 +11,7 @@ const envWallet = () => {
     require('dotenv').config()
   }
 
-  const _wallet = web3.eth.accounts.wallet.add(process.env.ETH_PRIVATE_KEY!)
-  console.log(_wallet)
-  return _wallet
+  return web3.eth.accounts.wallet.add(process.env.ETH_PRIVATE_KEY!)
 }
 
 const wallet = envWallet()

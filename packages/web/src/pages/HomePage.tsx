@@ -1,8 +1,10 @@
 import React from 'react'
 import { Form } from 'react-final-form'
-import { Box, Button, Card, Text, Flex, Heading } from 'rebass'
-import AddressBox from '../components/AddressBox'
-import TokenInput from '../components/TokenInput'
+import { BiPlayCircle, BiStopCircle } from 'react-icons/bi'
+import { Link as RouterLink } from 'react-router-dom'
+import { Box, Button, Card, Flex, Heading, Link, Text } from 'rebass'
+import { AddressBox, TokenInput, Footer, LoadingBlock } from '../components'
+import Routes from '../constants/Routes'
 import {
   useCreateWatcherMutation,
   useGetAddressQuery,
@@ -10,7 +12,6 @@ import {
   useGetWatchersQuery,
   useSetActiveWatcherMutation,
 } from '../generated/types'
-import { BiStopCircle, BiPlayCircle } from 'react-icons/bi'
 
 const HomePage = () => {
   const { data: addressData, loading: addressLoading } = useGetAddressQuery()
@@ -19,14 +20,28 @@ const HomePage = () => {
   const [setActiveWatcher] = useSetActiveWatcherMutation({
     refetchQueries: ['GetWatchers'],
   })
+
   const [createWatcher] = useCreateWatcherMutation({
     refetchQueries: ['GetWatchers'],
   })
 
+  const activeWatchers = watcherData?.getWatchers?.filter(
+    (watcher) => watcher?.isActive
+  )
+  const inactiveWatchers = watcherData?.getWatchers?.filter(
+    (watcher) => !watcher?.isActive
+  )
+
   return (
     <>
       <Flex px={5} py={4} alignItems="center">
-        <Heading>Tradr</Heading>
+        <Heading>
+          <RouterLink to={Routes.home}>
+            <Link as="span" variant="nav">
+              Tradr
+            </Link>
+          </RouterLink>
+        </Heading>
         <Box mx="auto" />
         <AddressBox
           address={addressData?.getAddress}
@@ -43,7 +58,9 @@ const HomePage = () => {
               <Button variant="subtle" mx={3}>
                 Learn More
               </Button>
-              <Button variant="outline">Donate</Button>
+              <RouterLink to={Routes.donate}>
+                <Button variant="outline">Donate</Button>
+              </RouterLink>
             </Box>
           </Flex>
         </Card>
@@ -70,7 +87,7 @@ const HomePage = () => {
             }}
           >
             {({ handleSubmit }) => (
-              <Box as="form" px="25%" py={4}>
+              <Box as="form" mx="auto" width={[1 / 1, 1 / 2, 1 / 2.5]} py={4}>
                 <TokenInput
                   inputId="fromTokenAmount"
                   selectId="fromTokenId"
@@ -103,7 +120,9 @@ const HomePage = () => {
         <Box width="100%">
           <Heading>Your Active Trades</Heading>
 
-          {watcherData?.getWatchers?.map((watcher) => {
+          {watchersLoading && <LoadingBlock loading={watchersLoading} />}
+
+          {activeWatchers?.map((watcher) => {
             if (!watcher?.isActive) {
               return null
             }
@@ -114,7 +133,13 @@ const HomePage = () => {
             const toAmount = watcher?.toAmount
 
             return (
-              <Box width={1 / 2} variant="info" my={3}>
+              <Box
+                px={[4]}
+                width={[1 / 1, 1 / 2, 1 / 2.5]}
+                variant="info"
+                my={3}
+                key={watcher.id}
+              >
                 <Flex>
                   <Box width={2 / 3}>
                     <b>From:</b> {fromAmount} {fromToken?.symbol}
@@ -148,18 +173,21 @@ const HomePage = () => {
         <Box width="100%">
           <Heading>Your Inactive Trades</Heading>
 
-          {watcherData?.getWatchers?.map((watcher) => {
-            if (watcher?.isActive) {
-              return null
-            }
+          {watchersLoading && <LoadingBlock loading={watchersLoading} />}
 
+          {inactiveWatchers?.map((watcher) => {
             const fromToken = watcher?.fromToken
             const toToken = watcher?.toToken
             const fromAmount = watcher?.fromAmount
             const toAmount = watcher?.toAmount
 
             return (
-              <Box width={1 / 2} variant="info" my={3}>
+              <Box
+                width={[1 / 1, 1 / 2, 1 / 2.5]}
+                variant="info"
+                my={3}
+                key={watcher?.id}
+              >
                 <Flex>
                   <Box width={2 / 3}>
                     <b>From:</b> {fromAmount} {fromToken?.symbol}
@@ -187,6 +215,11 @@ const HomePage = () => {
               </Box>
             )
           })}
+        </Box>
+      </Flex>
+      <Flex px={5} py={4}>
+        <Box width="100%">
+          <Footer />
         </Box>
       </Flex>
     </>

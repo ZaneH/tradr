@@ -3,3 +3,8 @@
 .click-icon {
     cursor: pointer;
 }
+
+a {
+    text-decoration: none;
+    color: #FF3F00;
+}

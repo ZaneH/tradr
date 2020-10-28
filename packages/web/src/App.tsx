@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Routes from './constants/Routes'
 import { HomePage } from './pages'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
+import DonatePage from './pages/DonatePage'
 
 const theme = {
   ...preset,
@@ -67,6 +68,7 @@ const theme = {
     card: {
       borderRadius: 'default',
       boxShadow: 'smallGray',
+      fontFamily: 'body',
     },
     info: {
       px: 4,
@@ -74,6 +76,15 @@ const theme = {
       bg: 'gray',
       borderRadius: 'default',
       fontFamily: 'body',
+    },
+    link: {
+      fontFamily: 'body',
+      color: 'primary',
+      textDecoration: 'none',
+    },
+    nav: {
+      color: 'text',
+      textDecoration: 'none',
     },
   },
   fontWeights: {
@@ -124,8 +135,11 @@ const App = () => {
         <div className="App">
           <Router>
             <Switch>
-              <Route path={Routes.home}>
+              <Route path={Routes.home} exact>
                 <HomePage />
+              </Route>
+              <Route path={Routes.donate} exact>
+                <DonatePage />
               </Route>
             </Switch>
           </Router>
