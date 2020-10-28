@@ -119,7 +119,7 @@ const link = createHttpLink({
 const client = new ApolloClient({
   cache,
   link: link,
-  name: 'wavr',
+  name: 'tradr',
   version: '1.0',
   defaultOptions: {
     mutate: {
