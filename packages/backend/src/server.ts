@@ -1,6 +1,7 @@
 import { getDefaultProvider } from '@ethersproject/providers'
 import { GraphQLServer } from 'graphql-yoga'
 import { createContext } from './context'
+import { CConsole } from './modules/CConsole'
 import { beginMarketWatch } from './modules/Watcher'
 import { schema } from './schema'
 
@@ -14,7 +15,7 @@ new GraphQLServer({
   schema,
   context: createContext,
 }).start(async () => {
-  console.log(`🚀 Server ready at: http://localhost:4000`)
+  CConsole.green('[+]', 'Backend started: http://localhost:4000')
 
   beginMarketWatch()
 })

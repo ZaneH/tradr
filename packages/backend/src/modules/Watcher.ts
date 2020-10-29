@@ -1,10 +1,10 @@
-import { CConsole } from './CConsole'
+import { Price } from '@uniswap/sdk'
 import { CronJob } from 'cron'
 import { prisma } from '../context'
-import { getTradeInfo } from './Trades'
-import { Percent, Price } from '@uniswap/sdk'
+import { CConsole } from './CConsole'
+import { getTradeInfo, makeTrade } from './Trades'
 
-const marketCron = new CronJob('42 * * * * *', () => {
+const marketCron = new CronJob('35 * * * * *', () => {
   checkMarket()
 })
 
@@ -60,13 +60,14 @@ const checkMarket = async () => {
     // get the price data for the token pair
     const tradeInfo = await getTradeInfo(fromToken?.contract, toToken?.contract)
 
-    // invert the _fromTokenPrice for the _toTokenPrice
+    // note: invert the _fromTokenPrice for the _toTokenPrice
+    // ensure _fromTokenPrice is the right token
     const _fromTokenPrice =
       tradeInfo.pair.token0.address === fromToken.contract
         ? tradeInfo.pair.token0Price
         : tradeInfo.pair.token1Price
 
-    // log 1 FROM = X TO
+    // log 1 FROM = y TO
     CConsole.green(
       '[!]',
       `1 ${fromToken.symbol} = ${_fromTokenPrice.toSignificant()} ${
@@ -87,6 +88,8 @@ const checkMarket = async () => {
         `[+] Trade found (${(percentage * 100).toFixed(2)}%).`,
         `${fromAmount} ${fromToken.symbol} for ${toAmount} ${toToken.symbol}`
       )
+
+      makeTrade(fromAmount, toAmount)
     }
   })
 }
