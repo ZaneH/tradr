@@ -21,4 +21,5 @@ Open 2 instances of your Terminal
 
 # License
 GPL v3
+
 <img src="https://i.imgur.com/sFV78Mu.png" />
