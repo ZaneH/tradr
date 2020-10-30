@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/5nVIRe9.png" align="right" height="128px" width="128px">
+<img src="https://i.imgur.com/7ANBiRp.png" align="right" height="128px" width="128px">
 
 # Tradr
 This is built to be an open-source bot to watch Uniswap and make trades based on set critera.
@@ -21,4 +21,5 @@ Open 2 instances of your Terminal
 
 # License
 GPL v3
-<img src="https://i.imgur.com/Iuh5YgA.png" />
+
+<img src="https://i.imgur.com/sFV78Mu.png" />
