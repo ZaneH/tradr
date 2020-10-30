@@ -16,6 +16,8 @@ yarn prisma migrate up --experimental
 echo "Generating Prisma client..."
 yarn generate
 
+popd
+
 echo "Everything is ready!"
 echo "You must manually run 'yarn dev' from ./packages/backend"
 echo "and 'yarn start' from ./packages/web in another terminal"
