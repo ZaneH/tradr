@@ -15,6 +15,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createWatcher?: Maybe<Watcher>;
   setActiveWatcher?: Maybe<Watcher>;
+  deleteWatcher?: Maybe<Watcher>;
 };
 
 
@@ -29,6 +30,11 @@ export type MutationCreateWatcherArgs = {
 export type MutationSetActiveWatcherArgs = {
   id: Scalars['ID'];
   active: Scalars['Boolean'];
+};
+
+
+export type MutationDeleteWatcherArgs = {
+  id: Scalars['ID'];
 };
 
 export type Query = {
@@ -118,6 +124,19 @@ export type SetActiveWatcherMutation = (
   & { setActiveWatcher?: Maybe<(
     { __typename?: 'Watcher' }
     & WatcherFragmentFragment
+  )> }
+);
+
+export type DeleteWatcherMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteWatcherMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteWatcher?: Maybe<(
+    { __typename?: 'Watcher' }
+    & Pick<Watcher, 'id'>
   )> }
 );
 
@@ -289,6 +308,38 @@ export function useSetActiveWatcherMutation(baseOptions?: Apollo.MutationHookOpt
 export type SetActiveWatcherMutationHookResult = ReturnType<typeof useSetActiveWatcherMutation>;
 export type SetActiveWatcherMutationResult = Apollo.MutationResult<SetActiveWatcherMutation>;
 export type SetActiveWatcherMutationOptions = Apollo.BaseMutationOptions<SetActiveWatcherMutation, SetActiveWatcherMutationVariables>;
+export const DeleteWatcherDocument = gql`
+    mutation DeleteWatcher($id: ID!) {
+  deleteWatcher(id: $id) {
+    id
+  }
+}
+    `;
+export type DeleteWatcherMutationFn = Apollo.MutationFunction<DeleteWatcherMutation, DeleteWatcherMutationVariables>;
+
+/**
+ * __useDeleteWatcherMutation__
+ *
+ * To run a mutation, you first call `useDeleteWatcherMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteWatcherMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteWatcherMutation, { data, loading, error }] = useDeleteWatcherMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteWatcherMutation(baseOptions?: Apollo.MutationHookOptions<DeleteWatcherMutation, DeleteWatcherMutationVariables>) {
+        return Apollo.useMutation<DeleteWatcherMutation, DeleteWatcherMutationVariables>(DeleteWatcherDocument, baseOptions);
+      }
+export type DeleteWatcherMutationHookResult = ReturnType<typeof useDeleteWatcherMutation>;
+export type DeleteWatcherMutationResult = Apollo.MutationResult<DeleteWatcherMutation>;
+export type DeleteWatcherMutationOptions = Apollo.BaseMutationOptions<DeleteWatcherMutation, DeleteWatcherMutationVariables>;
 export const GetWatchersDocument = gql`
     query GetWatchers {
   getWatchers {

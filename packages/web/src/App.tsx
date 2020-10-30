@@ -9,9 +9,8 @@ import { ThemeProvider } from 'emotion-theming'
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Routes from './constants/Routes'
-import { HomePage } from './pages'
+import { HelpPage, HomePage, DonatePage } from './pages'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
-import DonatePage from './pages/DonatePage'
 
 const theme = {
   ...preset,
@@ -64,6 +63,23 @@ const theme = {
       color: 'lightText',
     },
   },
+  forms: {
+    input: {
+      border: 'none',
+      boxShadow: 'smallGray',
+      py: 3,
+      px: 3,
+      textAlign: 'right',
+    },
+    select: {
+      borderColor: 'primary',
+      borderWidth: '2px',
+      color: 'primary',
+      px: 3,
+      py: '12px',
+      boxShadow: 'smallGray',
+    },
+  },
   variants: {
     card: {
       borderRadius: 'default',
@@ -95,6 +111,9 @@ const theme = {
     h3: {
       fontWeight: 400,
       fontSize: 3,
+    },
+    h2: {
+      mb: 2,
     },
   },
   shadows: {
@@ -140,6 +159,9 @@ const App = () => {
               </Route>
               <Route path={Routes.donate} exact>
                 <DonatePage />
+              </Route>
+              <Route path={Routes.help} exact>
+                <HelpPage />
               </Route>
             </Switch>
           </Router>

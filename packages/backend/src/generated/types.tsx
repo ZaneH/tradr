@@ -13,6 +13,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createWatcher?: Maybe<Watcher>;
   setActiveWatcher?: Maybe<Watcher>;
+  deleteWatcher?: Maybe<Watcher>;
 };
 
 
@@ -27,6 +28,11 @@ export type MutationCreateWatcherArgs = {
 export type MutationSetActiveWatcherArgs = {
   id: Scalars['ID'];
   active: Scalars['Boolean'];
+};
+
+
+export type MutationDeleteWatcherArgs = {
+  id: Scalars['ID'];
 };
 
 export type Query = {

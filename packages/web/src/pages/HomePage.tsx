@@ -1,12 +1,13 @@
 import React from 'react'
 import { Form } from 'react-final-form'
-import { BiPlayCircle, BiStopCircle } from 'react-icons/bi'
+import { BiPlayCircle, BiStopCircle, BiTrash } from 'react-icons/bi'
 import { Link as RouterLink } from 'react-router-dom'
 import { Box, Button, Card, Flex, Heading, Link, Text } from 'rebass'
 import { AddressBox, TokenInput, Footer, LoadingBlock } from '../components'
 import Routes from '../constants/Routes'
 import {
   useCreateWatcherMutation,
+  useDeleteWatcherMutation,
   useGetAddressQuery,
   useGetSupportedTokensQuery,
   useGetWatchersQuery,
@@ -25,9 +26,14 @@ const HomePage = () => {
     refetchQueries: ['GetWatchers'],
   })
 
+  const [deleteWatcher] = useDeleteWatcherMutation({
+    refetchQueries: ['GetWatchers'],
+  })
+
   const activeWatchers = watcherData?.getWatchers?.filter(
     (watcher) => watcher?.isActive
   )
+
   const inactiveWatchers = watcherData?.getWatchers?.filter(
     (watcher) => !watcher?.isActive
   )
@@ -55,9 +61,11 @@ const HomePage = () => {
               <Heading variant="h3">Automate your trades, for free!</Heading>
             </Box>
             <Box width={1 / 2} sx={{ textAlign: 'right' }}>
-              <Button variant="subtle" mx={3}>
-                Learn More
-              </Button>
+              <RouterLink to={Routes.help}>
+                <Button variant="subtle" mx={3}>
+                  Learn More
+                </Button>
+              </RouterLink>
               <RouterLink to={Routes.donate}>
                 <Button variant="outline">Donate</Button>
               </RouterLink>
@@ -120,6 +128,12 @@ const HomePage = () => {
         <Box width="100%">
           <Heading>Your Active Trades</Heading>
 
+          {!watchersLoading && activeWatchers?.length === 0 && (
+            <Text px={3} py={2}>
+              No active trades to show
+            </Text>
+          )}
+
           {watchersLoading && <LoadingBlock loading={watchersLoading} />}
 
           {activeWatchers?.map((watcher) => {
@@ -173,6 +187,12 @@ const HomePage = () => {
         <Box width="100%">
           <Heading>Your Inactive Trades</Heading>
 
+          {!watchersLoading && inactiveWatchers?.length === 0 && (
+            <Text px={3} py={2}>
+              No inactive trades to show
+            </Text>
+          )}
+
           {watchersLoading && <LoadingBlock loading={watchersLoading} />}
 
           {inactiveWatchers?.map((watcher) => {
@@ -207,6 +227,23 @@ const HomePage = () => {
                               active: true,
                             },
                           })
+                        }}
+                      />
+                      <BiTrash
+                        className="click-icon trash"
+                        size={24}
+                        onClick={() => {
+                          if (
+                            window.confirm(
+                              'Are you sure you want to delete this?'
+                            )
+                          ) {
+                            deleteWatcher({
+                              variables: {
+                                id: watcher!.id,
+                              },
+                            })
+                          }
                         }}
                       />
                     </Text>

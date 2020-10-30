@@ -53,6 +53,23 @@ const Mutation = mutationType({
         })
       },
     })
+
+    /**
+     * Delete a Watcher.
+     */
+    t.field('deleteWatcher', {
+      type: 'Watcher',
+      args: {
+        id: idArg({ nullable: false }),
+      },
+      resolve: (root, { id }, ctx) => {
+        return ctx.prisma.watcher.delete({
+          where: {
+            id,
+          },
+        })
+      },
+    })
   },
 })
 

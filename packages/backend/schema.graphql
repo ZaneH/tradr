@@ -4,6 +4,7 @@
 
 type Mutation {
   createWatcher(fromTokenAmount: Float!, fromTokenId: ID!, toTokenAmount: Float!, toTokenId: ID!): Watcher
+  deleteWatcher(id: ID!): Watcher
   setActiveWatcher(active: Boolean!, id: ID!): Watcher
 }
 

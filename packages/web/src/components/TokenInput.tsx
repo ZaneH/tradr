@@ -32,7 +32,7 @@ const Adapted = {
 
 const TokenInput = ({ tokens, selectId, inputId, ...props }: Props) => {
   return (
-    <Flex>
+    <Flex alignItems="center">
       <Box width={3 / 4} mx={2}>
         <Adapted.Input
           inputId={inputId}

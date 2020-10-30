@@ -9,3 +9,9 @@ mutation SetActiveWatcher($id: ID!, $active: Boolean!) {
         ...WatcherFragment
     }
 }
+
+mutation DeleteWatcher($id: ID!) {
+    deleteWatcher(id: $id) {
+        id
+    }
+}

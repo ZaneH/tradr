@@ -59,6 +59,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createWatcher: NexusGenRootTypes['Watcher'] | null; // Watcher
+    deleteWatcher: NexusGenRootTypes['Watcher'] | null; // Watcher
     setActiveWatcher: NexusGenRootTypes['Watcher'] | null; // Watcher
   }
   Query: { // field return type
@@ -88,6 +89,9 @@ export interface NexusGenArgTypes {
       fromTokenId: string; // ID!
       toTokenAmount: number; // Float!
       toTokenId: string; // ID!
+    }
+    deleteWatcher: { // args
+      id: string; // ID!
     }
     setActiveWatcher: { // args
       active: boolean; // Boolean!
