@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/7Zh17JO.png" align="right" height="128px" width="128px">
+<img src="https://i.imgur.com/7ANBiRp.png" align="right" height="128px" width="128px">
 
 # Tradr
 This is built to be an open-source bot to watch Uniswap and make trades based on set critera.
