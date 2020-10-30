@@ -16,3 +16,7 @@ Open 2 instances of your Terminal
 
 ## Run production servers (Mainnet)
 (Coming soon)
+
+# License
+GNU General Public License v3
+<img src="https://i.imgur.com/Iuh5YgA.png" />
