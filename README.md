@@ -1,6 +1,6 @@
 <img src="https://i.imgur.com/7ANBiRp.png" align="right" height="128px" width="128px">
 
-# Tradr
+# Tradr (Incomplete)
 This is built to be an open-source bot to watch Uniswap and make trades based on set critera.
 
 # Requirements
