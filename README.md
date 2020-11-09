@@ -8,6 +8,11 @@ This is built to be an open-source bot to watch Uniswap and make trades based on
 - [ ] Node.js
 - [ ] yarn
 
+# Todo
+- [ ] Fix an issue with making the trade ([Stackoverflow](https://stackoverflow.com/questions/64583374/issue-encoding-array-of-addresses-for-web3))
+- [ ] Allow the maximum gas price to be adjusted
+- [ ] Allow the slippage tolerance to be adjusted
+
 # Setup
 Simply clone the repo and run `./start.sh`. If everything succeeds, you'll be able to run the servers on your machine.
 
